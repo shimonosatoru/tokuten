@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>カーソルを追いかけるキャラのサイトの作り方</title>
+<style>
+:root { color-scheme: light; --accent: #6d4bd6; --line: #e6e3ef; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif; line-height: 1.8;
+  color: #1f1d2b; background: #faf9fd; }
+main { max-inline-size: 760px; margin-inline: auto; padding: 32px 20px 80px; }
+h1 { font-size: 1.6rem; line-height: 1.4; margin-block: 0 .5em; }
+h2 { font-size: 1.25rem; margin-block: 2em .6em; padding-inline-start: .6em; border-inline-start: 5px solid var(--accent); }
+h3 { font-size: 1.05rem; margin-block: 1.6em .4em; }
+hr { border: 0; border-block-start: 1px solid var(--line); margin-block: 2em; }
+code { font-family: ui-monospace, Menlo, monospace; font-size: .9em; background: #efecf7; padding: .1em .35em; border-radius: 4px; }
+pre { margin: 0; padding: 16px; overflow-x: auto; background: #1f1d2b; color: #f3f1fa; border-radius: 10px;
+  white-space: pre-wrap; word-break: break-word; }
+pre code { background: none; padding: 0; color: inherit; font-size: .88rem; line-height: 1.7; }
+.copyable { display: flex; flex-direction: column; gap: 8px; margin-block: 1em 1.5em; }
+.copy { position: relative; align-self: flex-end; }
+.copy-button { min-inline-size: 24px; min-block-size: 24px; padding: 6px 16px; font: inherit; font-size: .9rem; font-weight: 700;
+  color: #fff; background: var(--accent); border: 0; border-radius: 999px; cursor: pointer; }
+.copy-button[data-copied] { background: #1f9d55; }
+.copy-button[data-failed] { background: #c0392b; }
+.tip { position: absolute; inset-inline-end: 0; inset-block-end: calc(100% + 6px); white-space: nowrap; font-size: .8rem;
+  background: #1f1d2b; color: #fff; padding: 2px 8px; border-radius: 6px; opacity: 0; transition: opacity .15s; }
+.tip:not(:empty) { opacity: 1; }
+.table { overflow-x: auto; }
+table { border-collapse: collapse; inline-size: 100%; font-size: .92rem; background: #fff; }
+th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: start; vertical-align: top; }
+th { background: #f1eef9; }
+blockquote { margin: 1em 0; padding: 12px 16px; background: #fff7e6; border-radius: 8px; border-inline-start: 4px solid #f0a500; }
+@media (prefers-reduced-motion: reduce) { .tip { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+<h1>カーソルを追いかけるキャラのサイトの作り方</h1>
+<p>マウスを動かすと、キャラがそっちを向くWebサイトの作り方です。<br>プログラミングの知識はいりません。プロンプトはコピペでそのまま使えます。</p>
+<hr>
+<h2>用意するもの</h2>
+<div class="table"><table><thead><tr><th>使うもの</th><th>何に使う</th><th>メモ</th></tr></thead><tbody><tr><td>ChatGPT</td><td>キャラの画像を作る</td><td>画像を作れる回数はプランによって違います</td></tr><tr><td>Gemini</td><td>キャラが動く動画を作る</td><td>動画を作る機能は、プランによって使えないことがあります</td></tr><tr><td>Claude Code（または Codex）</td><td>動画からWebサイトを作る</td><td>どちらも有料プランが必要です</td></tr><tr><td>パソコン（Mac / Windows）</td><td></td><td>スマホだけでは作れません</td></tr></tbody></table></div>
+<p>全体の流れ：<strong>キャラ画像 → 動画 → Webサイト</strong></p>
+<hr>
+<h2>ステップ1：ChatGPTでキャラを作る</h2>
+<p>自分の写真から作るか、文章だけで作るか、どちらかを選んでください。</p>
+<h3>A. 自分の写真から作る</h3>
+<p>写真をアップロードしてから、次のプロンプトを送ります。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code1" aria-label="プロンプト1をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code1">添付した写真の人物をもとに、キャラクターのイラストを作ってください。
+
+【テイスト】
+（例：ゆるい手描き風／3Dアニメ風／ドット絵風 など好きなものに書き換えてください）
+
+【必ず守ること】
+・正面を向いた、胸から上のキャラクター
+・キャラクターは画面の真ん中に置く
+・頭のまわりに余白をしっかりとる（あとで首を動かすため）
+・背景は無地の単色（白か薄いグレー）。模様や小物は入れない
+・横長（16:9）の画像</code></pre></div>
+<h3>B. 文章だけで作る</h3>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code2" aria-label="プロンプト2をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code2">次のキャラクターのイラストを作ってください。
+
+【キャラクター】
+（例：メガネをかけた白いフクロウ。ちょっと眠そうな目）
+
+【テイスト】
+（例：ゆるい手描き風／3Dアニメ風／ドット絵風 など）
+
+【必ず守ること】
+・正面を向いた、胸から上のキャラクター
+・キャラクターは画面の真ん中に置く
+・頭のまわりに余白をしっかりとる（あとで首を動かすため）
+・背景は無地の単色（白か薄いグレー）。模様や小物は入れない
+・横長（16:9）の画像</code></pre></div>
+<p>できた画像は保存しておきます（画像を右クリック →「画像を保存」）。</p>
+<blockquote><strong>注意</strong>：ネットで拾った他の人のイラストや写真を元にキャラを作るのはやめましょう。作者の権利を侵害するおそれがあります。</blockquote>
+<hr>
+<h2>ステップ2：Geminiでキャラが動く動画を作る</h2>
+<ol><li>Geminiを開いて、ステップ1のキャラ画像をアップロード</li><li>入力欄の「＋」から「動画」を選ぶ</li><li>縦横の比率を「16:9」にする</li><li>次のプロンプトを貼って送信</li></ol>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code3" aria-label="プロンプト3をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code3">添付したキャラクターが、その場で首と目を動かして、いろいろな方向を見る動画を作ってください。
+
+【動きの順番】
+1. はじめの1秒は、正面を向いたまま止まる
+2. 左 → 左上 → 上 → 右上 → 右 → 右下 → 下 → 左下 → 左 の順に、時計回りでゆっくり1周見回す
+3. 最後の1秒で正面に戻って止まる
+
+【必ず守ること】
+・カメラは完全に固定。ズーム・パン・揺れは一切なし
+・キャラの位置と大きさは最初から最後まで変えない。動くのは頭と目だけ
+・背景は元の画像のまま変えない
+・まばたき以外の表情はあまり変えない
+・音はなし</code></pre></div>
+<p>生成が終わったら、動画をダウンロードします。</p>
+<blockquote><strong>うまくいかないとき</strong>：キャラが歩き出したり、カメラが動いたりしたら、もう一度生成してください。「カメラは完全に固定」の部分を何度か書き足すと安定しやすくなります。</blockquote>
+<hr>
+<h2>ステップ3：フォルダを作って動画を入れる</h2>
+<p>デスクトップなどに新しいフォルダを作り（名前は自由。例：<code>cursor-chara</code>）、ステップ2の動画を入れます。</p>
+<hr>
+<h2>ステップ4：Claude Code（またはCodex）でWebサイトにする</h2>
+<ol><li>Claude Code（またはCodex）を開く</li><li>ステップ3のフォルダを選ぶ</li><li>次のプロンプトを貼って送信</li></ol>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code4" aria-label="プロンプト4をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code4">このフォルダにある動画を使って、マウスカーソルの方向をキャラクターが見るWebサイトを作ってください。
+
+【やってほしいこと】
+1. 動画からフレーム（コマ）を画像として書き出し、中身を見て、それぞれのコマでキャラが「正面・上・右上・右・右下・下・左下・左・左上」のどの方向を見ているかを調べる
+2. カーソルが「キャラの顔から見てどの方向にあるか」を計算し、その方向を見ているコマを表示する
+3. カーソルが顔のすぐ近くにあるときは、正面を向いたコマを表示する
+4. コマの切り替えはなめらかにして、急に飛ばないようにする
+5. スマホでは、指でなぞった位置を追いかけるようにする
+
+【サイトの見た目】
+・キャラは画面の真ん中に、なるべく大きく表示する
+・背景は動画の背景と同じ色で、画面いっぱいに塗る
+・余計な文字やボタンは置かない
+
+【仕上げ】
+・index.html をダブルクリックするだけで動く形にする（サーバーなしで動くように）
+・完成したらブラウザで開いて、カーソルの方向とキャラの向きが合っているか確認する</code></pre></div>
+<p>完成したら、フォルダの中の <code>index.html</code> をダブルクリックして開いてみてください。<br>カーソルを動かすと、キャラが追いかけてくれます！</p>
+<hr>
+<h2>うまくいかないとき</h2>
+<div class="table"><table><thead><tr><th>困ったこと</th><th>こう頼んでみてください</th></tr></thead><tbody><tr><td>カーソルと逆の方向を向く</td><td>「カーソルと逆を向いているので、向きを直して」</td></tr><tr><td>動きがカクカクする</td><td>「動きがカクカクするので、もっとなめらかにして」</td></tr><tr><td>キャラが小さい／はみ出す</td><td>「キャラをもっと大きく（小さく）して」</td></tr><tr><td>「ffmpegがない」と言われた</td><td>「必要なものを入れて、続けて」と送れば、AIが準備してくれます（インストールの許可を聞かれたら「OK」）</td></tr><tr><td>画面が真っ白で何も出ない</td><td>「index.htmlを開いても何も表示されないので、原因を調べて直して」</td></tr></tbody></table></div>
+<hr>
+<h2>もっと楽しむアレンジ</h2>
+<p>できあがったサイトに、Claude Code（Codex）でもう一言頼むだけで追加できます。</p>
+<ul><li>「クリックしたら、キャラがびっくりするようにして」</li><li>「カーソルを長く止めていたら、キャラが眠るようにして」</li><li>「キャラの横に、会社名とキャッチコピーを入れて」→ そのまま会社サイトやLPのトップに使えます</li></ul>
+<hr>
+<p>質問や「こんなの作りたい」があれば、このLINEのトークで気軽にどうぞ！</p>
+</main>
+<script>
+const timers = new WeakMap();
+function report(button, ok) {
+  const tip = button.nextElementSibling;
+  clearTimeout(timers.get(button));
+  button.removeAttribute('data-copied');
+  button.removeAttribute('data-failed');
+  tip.textContent = '';
+  button.setAttribute(ok ? 'data-copied' : 'data-failed', '');
+  button.textContent = ok ? 'コピーしました' : 'コピー失敗';
+  requestAnimationFrame(() => (tip.textContent = ok ? 'コピーしました' : 'コピーできませんでした'));
+  timers.set(button, setTimeout(() => {
+    button.removeAttribute('data-copied');
+    button.removeAttribute('data-failed');
+    button.textContent = 'コピー';
+    tip.textContent = '';
+  }, 2000));
+}
+async function copy(button, target) {
+  const text = target.innerText.trim();
+  if (!text) return;
+  try { await navigator.clipboard.writeText(text); report(button, true); }
+  catch { report(button, false); }
+}
+if ('CommandEvent' in window) {
+  document.addEventListener('command', (e) => { if (e.command === '--copy') copy(e.source, e.target); }, true);
+} else {
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented) return;
+    const b = e.target.closest('button[command="--copy"]');
+    const t = b && document.getElementById(b.getAttribute('commandfor'));
+    if (t) copy(b, t);
+  });
+}
+</script>
+</body>
+</html>
