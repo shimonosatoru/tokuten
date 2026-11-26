@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Muse（ミューズ）の活用方法10選</title>
+<style>
+:root { color-scheme: light; --accent: #6d4bd6; --line: #e6e3ef; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif; line-height: 1.8;
+  color: #1f1d2b; background: #faf9fd; }
+main { max-inline-size: 760px; margin-inline: auto; padding: 32px 20px 80px; }
+h1 { font-size: 1.6rem; line-height: 1.4; margin-block: 0 .5em; }
+h2 { font-size: 1.25rem; margin-block: 2em .6em; padding-inline-start: .6em; border-inline-start: 5px solid var(--accent); }
+h3 { font-size: 1.05rem; margin-block: 1.6em .4em; }
+hr { border: 0; border-block-start: 1px solid var(--line); margin-block: 2em; }
+code { font-family: ui-monospace, Menlo, monospace; font-size: .9em; background: #efecf7; padding: .1em .35em; border-radius: 4px; }
+pre { margin: 0; padding: 16px; overflow-x: auto; background: #1f1d2b; color: #f3f1fa; border-radius: 10px;
+  white-space: pre-wrap; word-break: break-word; }
+pre code { background: none; padding: 0; color: inherit; font-size: .88rem; line-height: 1.7; }
+.copyable { display: flex; flex-direction: column; gap: 8px; margin-block: 1em 1.5em; }
+.copy { position: relative; align-self: flex-end; }
+.copy-button { min-inline-size: 24px; min-block-size: 24px; padding: 6px 16px; font: inherit; font-size: .9rem; font-weight: 700;
+  color: #fff; background: var(--accent); border: 0; border-radius: 999px; cursor: pointer; }
+.copy-button[data-copied] { background: #1f9d55; }
+.copy-button[data-failed] { background: #c0392b; }
+.tip { position: absolute; inset-inline-end: 0; inset-block-end: calc(100% + 6px); white-space: nowrap; font-size: .8rem;
+  background: #1f1d2b; color: #fff; padding: 2px 8px; border-radius: 6px; opacity: 0; transition: opacity .15s; }
+.tip:not(:empty) { opacity: 1; }
+.table { overflow-x: auto; }
+table { border-collapse: collapse; inline-size: 100%; font-size: .92rem; background: #fff; }
+th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: start; vertical-align: top; }
+th { background: #f1eef9; }
+blockquote { margin: 1em 0; padding: 12px 16px; background: #fff7e6; border-radius: 8px; border-inline-start: 4px solid #f0a500; }
+@media (prefers-reduced-motion: reduce) { .tip { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Muse（ミューズ）の活用方法10選</h1>
+<p>MetaのAIエージェント「Muse」に、パソコン作業を任せる使い方を10個まとめました。<br>頼み方（プロンプト）はコピペでそのまま使えます。（　）の中だけ、自分用に書き換えてください。</p>
+<hr>
+<h2>はじめに：Museってなに？</h2>
+<p>Museは、Metaが出した「代わりに作業してくれるAI」です。<br>質問に答えるだけのAIと違って、ブラウザを開いてサイトを見たり、ファイルを整理したり、フォームに入力したりと、実際に手を動かしてくれます。</p>
+<div class="table"><table><thead><tr><th>使う場所</th><th>できること</th></tr></thead><tbody><tr><td>スマホアプリ・Web</td><td>Meta側にある自分専用のパソコンで、ブラウザを使って作業してくれる</td></tr><tr><td>Macアプリ</td><td>自分のMacのファイル、メール、カレンダー、メモなどを使って作業してくれる</td></tr></tbody></table></div>
+<p>作業中の画面は自分でも見られて、途中でいつでも割り込めます。</p>
+<hr>
+<h2>1. ネットの調べものを、全部集めて表にしてもらう</h2>
+<p>1件ずつページを開いて、Excelにコピペ…という作業をまるごと任せます。<br>僕が試したときは、検索結果が1000件くらいあって、Museが自分でやり方を考えて全件まとめて取ってきてくれました。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code1" aria-label="プロンプト1をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code1">（サイト名）で「（キーワード）」を検索して、出てきた結果を全件集めてください。
+そのうえで内容ごとにジャンル分けして、「ジャンル名・件数・代表的な例」がわかる表にまとめてください。</code></pre></div>
+<h2>2. 仕入れ先・外注先・競合の比較表を作ってもらう</h2>
+<p>何社もサイトを見比べる作業は、Museの得意分野です。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code2" aria-label="プロンプト2をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code2">（地域）で（業種・サービス）をやっている会社を10社探してください。
+それぞれの「会社名・料金・特徴・サイトのURL」を表にまとめて、最後におすすめの3社と理由を書いてください。
+料金がサイトに書いていない会社は「記載なし」としてください。</code></pre></div>
+<h2>3. Macの中の書類を探して、まとめてもらう</h2>
+<p>散らばった請求書や見積書を、1つのフォルダに集めてもらえます。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code3" aria-label="プロンプト3をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code3">先月（〇月）の請求書を、Mac全体から探して「〇月_請求書」というフォルダにまとめてください。
+集めたファイルの一覧（ファイル名・取引先・金額）も表にしてください。</code></pre></div>
+<h2>4. メールから予定を拾って、カレンダーに入れてもらう</h2>
+<p>Gmailやカレンダーをつなぐと、メールに書いてある締め切りや打ち合わせの日程を拾ってくれます。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code4" aria-label="プロンプト4をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code4">この1週間に届いたメールから、締め切りや打ち合わせの日程を探してください。
+見つかったものを一覧にして、カレンダーに入れてよいか確認してから登録してください。</code></pre></div>
+<h2>5. メールの返信の下書きを作ってもらう</h2>
+<p>送る前に必ず確認を求めてくれるので、下書きまで任せるのが安心です。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code5" aria-label="プロンプト5をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code5">未返信のメールの中から、返事が必要なものを選んで、それぞれ返信の下書きを作ってください。
+送信はせず、下書きのまま一覧で見せてください。</code></pre></div>
+<h2>6. 面倒なフォーム入力・アカウント登録を任せる</h2>
+<p>申し込みフォームや会員登録など、同じことを何度も入力する作業を任せられます。<br>僕が使ったときは、アカウント登録までやってくれました。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code6" aria-label="プロンプト6をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code6">（サイト名）で（サービス名）のアカウントを作ってください。
+会社名は（〇〇）、担当者名は（〇〇）、メールアドレスは（〇〇）を使ってください。
+パスワードを決める画面と、最後の「登録する」ボタンの前で止めて、僕に確認してください。</code></pre></div>
+<blockquote><strong>注意</strong>：パスワードや支払い情報は、自分で入力しましょう。</blockquote>
+<h2>7. 打ち合わせの前に、関係する情報を集めてもらう</h2>
+<p>カレンダーの予定、メールのやりとり、フォルダの資料、メモを、アプリをまたいでまとめてくれます。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code7" aria-label="プロンプト7をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code7">明日の（会社名）との打ち合わせの準備をしてください。
+カレンダーの予定、（会社名）とのメール、関係するファイルとメモを探して、
+「これまでの経緯・相手から聞かれていること・こちらが確認したいこと」を1ページにまとめてください。</code></pre></div>
+<h2>8. 調べた内容から、資料のたたき台を作ってもらう</h2>
+<p>Googleドキュメントをつなぐと、調べた内容をそのまま資料の形にしてくれます。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code8" aria-label="プロンプト8をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code8">（テーマ）について調べて、社内向けの報告書のたたき台をGoogleドキュメントで作ってください。
+構成は「結論・背景・わかったこと・次にやること」の順で、使った情報のURLも最後に載せてください。</code></pre></div>
+<h2>9. 時間のかかる作業は、夜に頼んでおく</h2>
+<p>Museは、アプリの画面を閉じても裏で作業を続けてくれます。<br>終わったら通知が来るので、長い調べものは寝る前や外出前に頼んでおくのがおすすめです。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code9" aria-label="プロンプト9をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code9">明日の朝までに、（テーマ）について調べてまとめておいてください。
+途中で僕の確認が必要なことがあれば、そこで止めずに一覧にして、最後にまとめて聞いてください。</code></pre></div>
+<h2>10. 外出先からスマホで頼む</h2>
+<p>スマホのアプリから頼めば、Meta側の専用パソコンで作業してくれます。<br>移動中に思いついたことを、その場で任せられます。</p>
+<div class="copyable"><span class="copy"><button type="button" class="copy-button" command="--copy" commandfor="code10" aria-label="プロンプト10をコピー">コピー</button><span class="tip" role="status"></span></span><pre tabindex="0"><code id="code10">（サイト名）を見て、（商品・サービス）の最新の料金と、前回から変わった点をまとめてください。
+変わった点がなければ「変更なし」とだけ教えてください。</code></pre></div>
+<hr>
+<h2>使う前に知っておきたいこと</h2>
+<ul><li>メッセージの送信、ファイルの削除、購入など、取り消しにくい操作の前には、Museが確認を求めてきます</li><li>Macアプリがどこまでファイルやアプリを使えるかは、Macの「システム設定」→「プライバシーとセキュリティ」で、あとから変えられます</li><li>仕事用のMacには、お客さまの情報なども入っています。Museに使わせるフォルダは、必要なものだけにしておくと安心です</li><li>無料で始められて、たくさん使う人向けに有料プランもあります。料金や使える範囲は変わることがあるので、最新の情報は公式サイトで確認してください（2026年11月時点の情報です）</li></ul>
+<hr>
+<p>質問や「こんなことに使えないかな」という相談があれば、このLINEのトークで気軽にどうぞ！</p>
+</main>
+<script>
+const timers = new WeakMap();
+function report(button, ok) {
+  const tip = button.nextElementSibling;
+  clearTimeout(timers.get(button));
+  button.removeAttribute('data-copied');
+  button.removeAttribute('data-failed');
+  tip.textContent = '';
+  button.setAttribute(ok ? 'data-copied' : 'data-failed', '');
+  button.textContent = ok ? 'コピーしました' : 'コピー失敗';
+  requestAnimationFrame(() => (tip.textContent = ok ? 'コピーしました' : 'コピーできませんでした'));
+  timers.set(button, setTimeout(() => {
+    button.removeAttribute('data-copied');
+    button.removeAttribute('data-failed');
+    button.textContent = 'コピー';
+    tip.textContent = '';
+  }, 2000));
+}
+async function copy(button, target) {
+  const text = target.innerText.trim();
+  if (!text) return;
+  try { await navigator.clipboard.writeText(text); report(button, true); }
+  catch { report(button, false); }
+}
+if ('CommandEvent' in window) {
+  document.addEventListener('command', (e) => { if (e.command === '--copy') copy(e.source, e.target); }, true);
+} else {
+  document.addEventListener('click', (e) => {
+    if (e.defaultPrevented) return;
+    const b = e.target.closest('button[command="--copy"]');
+    const t = b && document.getElementById(b.getAttribute('commandfor'));
+    if (t) copy(b, t);
+  });
+}
+</script>
+</body>
+</html>
